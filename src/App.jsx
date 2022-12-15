@@ -4,32 +4,41 @@ import { calculateWinner } from "./helper";
 import "./styles/main.scss";
 
 const App = () => {
-  const [board, setBoard] = useState(Array(9).fill(null));
-  const [isXNext, setIsXNext] = useState(true);
+  //declares  initial state & keep track of state of board and next player which is null & x resp.
+  const [history, setHistory] = useState([
+    { board: Array(9).fill(null), isXNext: true },
+  ]);
+  //it keep track of current played move which is initially 0
+  const [currentMove, setCurrentMove] = useState(0);
+  //it will keep track of board state by played move(it is variable of array of objects of history)
+  const current = history[currentMove];
   //deciding winner by passing current board state
-  const winner = calculateWinner(board);
+  const winner = calculateWinner(current.board);
   //execute on the click
   const handleSquareOnClickEvent = (position) => {
     //check the position is aready filled or not
-    if (board[position] || winner) {
+    if (current.board[position] || winner) {
       return;
     }
+    console.log("history", history);
 
     //sets the board position either X or 0
-    setBoard((prev) => {
-      return prev.map((square, pos) => {
+    setHistory((prev) => {
+      const last = prev[prev.length - 1];
+
+      const newBoard = last.board.map((square, pos) => {
         if (pos === position) {
           //check which player's turn and retur X or 0
-          return isXNext ? "X" : "0";
+          return last.isXNext ? "X" : "0";
         }
 
         return square;
       });
+
+      return prev.concat({ board: newBoard, isXNext: !last.isXNext });
     });
-    //check which player's turn is next
-    setIsXNext((prev) => {
-      return !prev;
-    });
+
+    setCurrentMove((prev) => prev + 1);
   };
 
   return (
@@ -38,10 +47,10 @@ const App = () => {
       <h2>
         {winner
           ? `Winner is ${winner} ` //prints the winner
-          : `Next player is ${isXNext ? "X" : "0"}`}
+          : `Next player is ${current.isXNext ? "X" : "0"}`}
       </h2>
       <Board
-        Board={board}
+        Board={current.board}
         handleSquareOnClickEvent={handleSquareOnClickEvent}
       />
     </div>
