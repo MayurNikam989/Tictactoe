@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Board from "./components/Board";
 import { calculateWinner } from "./helper";
+import History from "./components/History";
 import "./styles/main.scss";
 
 const App = () => {
@@ -20,12 +21,12 @@ const App = () => {
     if (current.board[position] || winner) {
       return;
     }
-    console.log("history", history);
+    // console.log("history", history); consoles the history for verification
 
     //sets the board position either X or 0
     setHistory((prev) => {
       const last = prev[prev.length - 1];
-
+      //save the setted board to the newboard
       const newBoard = last.board.map((square, pos) => {
         if (pos === position) {
           //check which player's turn and retur X or 0
@@ -34,11 +35,15 @@ const App = () => {
 
         return square;
       });
-
+      //returns the array of objects & always should return in the pattern of initial state
       return prev.concat({ board: newBoard, isXNext: !last.isXNext });
     });
-
+    //sets/iterates prev by 1
     setCurrentMove((prev) => prev + 1);
+  };
+  //moveTo fn set current move to the respected move.
+  const moveTo = (move) => {
+    setCurrentMove(move);
   };
 
   return (
@@ -53,6 +58,7 @@ const App = () => {
         Board={current.board}
         handleSquareOnClickEvent={handleSquareOnClickEvent}
       />
+      <History history={history} moveTo={moveTo} currentMove={currentMove} />
     </div>
   );
 };
