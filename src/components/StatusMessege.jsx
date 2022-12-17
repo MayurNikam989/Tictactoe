@@ -16,14 +16,14 @@ const StatusMessege = ({ winner, current }) => {
         <>
           The Next Player is{" "}
           <span className={current.isXNext ? "text-green" : "text-orange"}>
-            {current.isXNext ? "X" : "0"}
+            {current.isXNext ? "X" : "O"}
           </span>
         </>
       )}
       {!winner && noMovesLeft && (
         <>
           <span className="text-green">X</span> &{" "}
-          <span className="text-orange">0</span> are Tied
+          <span className="text-orange">O</span> are Tied
         </>
       )}
     </h2>

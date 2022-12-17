@@ -32,7 +32,7 @@ const App = () => {
       const newBoard = last.board.map((square, pos) => {
         if (pos === position) {
           //check which player's turn and retur X or 0
-          return last.isXNext ? "X" : "0";
+          return last.isXNext ? "X" : "O";
         }
 
         return square;
