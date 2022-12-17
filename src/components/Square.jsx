@@ -1,12 +1,14 @@
 import React from "react";
 
-const Square = ({ value, onClick, iswinningSquare }) => {
+const Square = ({ value, onClick, isWinningSquare }) => {
   //for classname we use className=""
   return (
     <button
-      className="square"
+      className={`square ${value === "X" ? "text-green" : "text-orange"} ${
+        isWinningSquare ? "winning" : ""
+      }`}
       onClick={onClick}
-      style={{ fontWeight: iswinningSquare ? "bold" : "normal" }}
+      //To add style to winning Squares.
     >
       {value}
     </button>

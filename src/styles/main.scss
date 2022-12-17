@@ -1,6 +1,17 @@
+$orange: #f0d805;
+$green: #5fc704;
+$blue: #4c43d4;
+* {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  color: white;
+}
 body {
   padding: 0;
   margin: 0;
+  background-color: $blue;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 button {
@@ -23,14 +34,15 @@ button {
   .board-row {
     display: flex;
     flex-direction: row;
-    border-bottom: 2px solid #000;
+    border-bottom: 5px solid white;
+    border-radius: 5px;
     &:last-child {
       border-bottom: none;
     }
     .square {
       width: 100px;
       height: 100px;
-      border-right: 2px solid #000;
+      border-right: 5px solid white;
       font-size: 35px;
       padding: 0;
       overflow: hidden;
@@ -38,6 +50,45 @@ button {
       &:last-child {
         border-right: none;
       }
+      &.winning {
+        font-weight: bold;
+        animation: scaling 1.2s infinite;
+
+        @keyframes scaling {
+          0% {
+            font-weight: normal;
+            font-size: 35px;
+          }
+          50% {
+            font-weight: bold;
+            font-size: 38px;
+          }
+          100% {
+            font-weight: bolder;
+            font-size: 42px;
+          }
+        }
+      }
     }
+  }
+}
+.text-green {
+  color: $green;
+}
+
+.text-orange {
+  color: $orange;
+}
+
+.new-game {
+  padding: 10px;
+  margin-top: 10px;
+  font-size: large;
+  color: $green;
+  border: 1px solid $green;
+  border-radius: 10px;
+  &.active {
+    cursor: pointer;
+    background-color: $orange;
   }
 }
