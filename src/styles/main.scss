@@ -82,13 +82,46 @@ button {
 
 .new-game {
   padding: 10px;
-  margin-top: 10px;
+  margin-top: 20px;
   font-size: large;
-  color: $green;
-  border: 1px solid $green;
+
+  border: 1px solid white;
   border-radius: 10px;
   &.active {
     cursor: pointer;
     background-color: $orange;
+  }
+}
+
+.history-container {
+  padding: 5px;
+  margin: 5px;
+  text-align: center;
+  .history {
+    text-align: left;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    li {
+      list-style: none;
+      text-align: left;
+      list-style-position: inside;
+      &:before {
+        content: "";
+        border-radius: 50%;
+        display: inline-block;
+        height: 5px;
+        width: 5px;
+        background-color: $green;
+        margin-right: 4px;
+        margin-bottom: 1px;
+      }
+      .btn-move {
+        &.active {
+          font-weight: bold;
+          color: $green;
+        }
+      }
+    }
   }
 }
